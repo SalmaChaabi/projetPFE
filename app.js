@@ -3,11 +3,11 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
-const http = require('http'); //1
+const http = require('http'); //1 avec npm i nodemon
 
 require("dotenv").config(); //2
 
-
+const { connectToMongoDB } = require('./db/db')
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
@@ -42,5 +42,5 @@ app.use(function(err, req, res, next) {
   res.render('error');
 });
 
-const server = http.createServer(app);
-server.listen(process.env.PORT,()=>{console.log("app is running on port 5000")});
+const server = http.createServer(app); //1
+server.listen(process.env.PORT,()=>{connectToMongoDB(),console.log("app is running on port 5000")});//1 avec process.env.PORT
