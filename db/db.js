@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 
 module.exports.connectToMongoDB = () => {
     mongoose.set('strictQuery', false);
-    mongoose.connect('mongodb://localhost:27017').then(
+    mongoose.connect(process.env.URL_MONGO).then(
         () => {
         console.log('connect to BD');
         }
